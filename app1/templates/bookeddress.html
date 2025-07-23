@@ -1,0 +1,300 @@
+{% comment %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dress Catalog</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            background-color: #f8f8f8;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Dress Container */
+        .dress-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Dress Card */
+        .dress-card {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .dress-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dress-image {
+            width: 100%;
+            height: 500px; /* Update the desired height */
+            object-fit: cover;
+        }
+
+        .dress-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        .dress-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p.price {
+            font-weight: bold;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 960px) {
+            .dress-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dress-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<script>
+    function displayblock(){
+        document.getElementById('booking').style.display='none';
+    }
+</script>
+<body>
+    <header>
+        <h1>Dress Catalog</h1>
+    </header>
+
+    <div class="dress-container">
+        {% comment %} {% for img in userimg %} {% endcomment %}
+        {% comment %} {% for user_image in user_images %}
+        <div class="dress-card">
+            <img class="dress-image" src="{{ dress.img.image.url }}" alt="{{ dress.name }}">
+            <div class="dress-info">
+                <h3> <span style="text-transform:uppercase;">{{dress.type}}</span></h3>
+                <p><b>Dress_size:</b> {{ dress.img.dress_size }}<p>
+                <p><b>Dress_for: </b>{{ dress.img.dress_for }}</p>
+                <p class="price">Price: ${{ dress.img.price }}</p>
+                {% comment %} <p class="price">Poster: ${{ dress.img.loggeduser }}</p>
+                <p class="price">Order By:{{dress.name}}</p>
+                <p class="price">Orderer email:  {{dress.email}}</p>
+                <p class="price">Orderer address:{{dress.address}}</p>
+                {% comment %} {% for dress in booked_dresses%}
+                 {% comment %} {%if dress.img==user_image %} {% endcomment %}
+                {% comment %} <p>Booked by:{{dress.booked_by.name}}<p> {% endcomment %} 
+                    {% comment %} <p> {{user_image.dress.name}}</P> {% endcomment %} 
+                {% comment %} <button type="button" class="btn" onclick="document.getElementById('booking').style.display='block';">Book Now</a>
+            </div>
+        </div>
+       
+        {% endfor %}
+       
+    </div>
+    
+</body>
+</html>
+ {% endcomment %}
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Dress Catalog</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            background-color: #f8f8f8;
+        }
+
+        /* Header */
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Dress Container */
+        .dress-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Dress Card */
+        .dress-card {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .dress-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dress-image {
+            width: 100%;
+            height: auto; /* Updated to maintain aspect ratio */
+            object-fit: cover;
+        }
+
+        .dress-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        .dress-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p.price {
+            font-weight: bold;
+        }
+
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 960px) {
+            .dress-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dress-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Dress Catalog</h1>
+    </header>
+
+    <div class="dress-container">
+        <!-- Loop through booked dresses and display information -->
+        {% for dress in booked_dresses %}
+        <div class="dress-card">
+            <img class="dress-image" src="{{ dress.img.image.url }}" alt="{{ dress.name }}">
+            <div class="dress-info">
+                <h3>{{ dress.type | capitalize }}</h3>
+                <p><b>Dress Size:</b> {{ dress.img.dress_size }}</p>
+                <p><b>Dress For:</b> {{ dress.img.dress_for }}</p>
+                <p class="price"><b>Price:</b> ${{ dress.img.price }}</p>
+                <p><b>Ordered By:</b> {{ dress.name }}</p>
+                <p><b>Orderer Email:</b> {{ dress.email }}</p>
+                <p><b>Orderer Address:</b> {{ dress.address }}</p>
+                <button type="button" class="btn" onclick="displayblock()">Book Now</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <script>
+        function displayblock() {
+            document.getElementById('booking').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,844 @@
+{% comment %} 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Management</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+ 
+    /* Custom styles go here */
+   .head{
+      font-family: 'Dancing Script', cursive; 
+      margin-left:250px;
+      
+    } 
+      *{
+      margin:0;
+      padding:0;
+     
+      
+    }
+    
+   .header{
+      min-height:100vh;
+      width: 100%;
+      background-position: center;
+      background-size:cover;
+      position: relative;
+      color: black;
+  }
+nav{
+    display: flex;
+    padding: 2% 6%;
+    justify-content: space-between;
+    align-items: center;
+    color: black;
+
+}
+    nav img{
+  width:150px;
+} 
+.nav-links{
+  flex:1;
+  text-align: right;
+}
+
+ .nav-links ul li{
+  list-style: none;
+  display: inline-block;
+  padding:8px 12px ;
+  position: relative;
+  color: black;
+  
+} 
+a{
+  text-decoration:none;
+  color:#ff3366;
+  font-weight:bold;
+}
+.nav-links ul li::after{
+  content: '';
+  width: 0%;
+  height: 2px;
+  background:#f44336 ;
+  display:block;
+  margin: auto;
+  transition: 0s;
+  color: black;
+} 
+.nav-links ul li:hover:after{
+  width:100%;
+
+} 
+ .btn{
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #fff;
+  padding: 12px 34px;
+  font-size: 13px;
+  background: transparent;
+  background-color: black;
+  position: relative;
+  cursor: pointer;
+}
+ btn:hover{
+  border: 1px solid gray;
+  background: gray;
+  transition: 1s;
+
+}
+.nav.fa{
+  display:none;
+} 
+@media(max-width:700px){
+  .nav-links ul li{
+      display: block;
+  }
+  .nav-links{
+      position: absolute;
+      background: #f44336;
+      height: 100vh;
+      width: 200px;
+      top:0;
+      right: -200px;
+      text-align: left;
+      z-index: 2;
+     
+  } 
+
+ .nav.fa{
+  display: block;
+  color: #fff;
+  margin: 10px;
+  font-size: 22px;
+  cursor: pointer;
+}  
+.nav-links ul{
+  padding: 30px;
+}
+}  
+.course{
+  width:80% ;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+  color: black;
+} 
+ 
+  .row {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    margin-left:0px;
+}
+
+.col-md-4{
+  padding-left:0px;
+}
+.course-col{
+  flex-basis: 100%;
+  background:#f24973;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  padding:30px 12px ;
+  box-sizing: border-box;
+  color: black;
+  width: 305px;
+  margin-left: 30px;
+ 
+}
+.course-col:hover{
+  box-shadow:0 0 20px 0px rgba(0,0,0,0.2) ;
+  transition: 5s;
+}
+.campus{
+  width: 80%;
+  margin:auto ;
+  text-align: center;
+  padding-top:50px ;
+  color: black;
+
+}
+.campus-col{
+  flex-basis: 32%;
+  border-radius:10px ;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+  height:650px;
+  background-color:#f24973;
+  width:350px;
+  padding:5px;
+}
+.campus-col img{
+  width:100% ;
+  height:606px;
+  display:block ;
+}
+.layer{
+  background:transparent ;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.5s;
+  color: black;
+  
+}
+.layer:hover{
+ background: rgba(225,225,225,0.1);
+
+}
+.layer h3{
+  width:100% ;
+  font-weight: 500;
+  color: black;
+  font-size: 26px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.layer:hover h3{
+  bottom: 49%;
+  opacity:1 ;
+}
+
+
+.facilities{
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top:100px ;
+  
+}
+.faci-col{
+  flex-basis: 32%;
+  border-radius:10px ;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+
+}
+.faci-col img{
+  width:100% ;
+  display:block 
+}
+.faci-col p{
+  padding: 0;
+}
+.faci-col h3{
+  margin-top: 16px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.cta{
+  margin: 100px auto;
+  width: 80%;
+  background-position: center;
+  background-size: cover;
+  border-radius: 10px;
+  text-align: center;
+  padding:100px 0 ;
+  color: black;
+}
+.cta h1{
+  /* background-color:rgb(197, 170, 179) ; */
+  color:black;
+  margin-bottom:40px ;
+  padding:0;
+
+}
+
+.footer{
+  width: 100px;
+  text-align: center;
+
+}
+.footer:h4{
+  margin-bottom:25px ;
+  margin-top: 20px;
+  font-weight: 600;
+}    
+.container1{
+  height: 400px;
+  padding: 10px;
+  background-color:white;
+}
+
+h1{
+padding-top: 89px;
+font-size:50px;
+
+}
+
+
+.image-wrapper1 img{
+  width: 70%;
+  height: 380px;
+  padding:1px;
+}
+
+@media (max-width: 768px) {
+  /* Media query for smaller screens */
+  .nav-links ul {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #f44336;
+    width: 200px;
+    text-align: left;
+    z-index: 2;
+  }
+
+  .nav-links ul li {
+    display: block;
+    padding: 10px;
+  }
+
+  .nav.fa {
+    display: block;
+  }
+
+  .header {
+    background-image: linear-gradient(to bottom, pink, white);
+  }
+
+  .text h1 {
+    font-size: 30px;
+  }
+
+  .course-col {
+    flex-basis: 100%;
+  }
+
+  .course h2,
+  .course h3 {
+    font-size: 24px;
+  }
+
+  .course-col {
+    padding: 20px;
+  }
+
+  .course-col h3 {
+    font-size: 20px;
+  }
+
+  .course-col p {
+    font-size: 14px;
+  }
+
+  .campus-col {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .cta p {
+    font-size: 30px;
+  }
+} 
+</style>
+  </style>
+<body>
+  <header>
+  <section class="header" style="background-image:linear-gradient(to bottom,pink,white);">
+    <nav>
+        <div class="nav-links">
+          <ul>
+                <li><a class="nav-link" href="{% url 'login' %}">LOGIN</a></li>
+                <li><a class="nav-link" href="{% url 'women' %}">WOMEN</a></li>
+                <li><a class="nav-link" href="{% url 'men' %}">MEN</a></li>
+                <li><a class="nav-link" href="{% url 'kids' %}">KIDS</a></li>
+                <li><a class="nav-link" href="{% url 'userprofiles' %}">PROFILE</a></li>
+                <li> <a class="nav-link" href="{% url 'sendingotp' %}">BOOKEDVIEW</a></li>
+
+            </ul>
+        </div>
+        </nav>
+        <div class="main" style="height:600px;width:100%;">
+        <h1 class="sc"><pre class="head">
+                  LOVE 
+                           IN 
+                                STYLE
+            </pre></h1><div>
+      
+</section>
+            </div>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+<section class="campus">
+    <div class="container">
+      <p style="font-size:50px;font-weight:bold;text-align:center;">Make yourself comfort<p><br><br>
+      <h2>Fulfill your wish by wearing all type of dress</h2><br>
+        <h3 style="text-align:center;">You can buy a any type of dresses which will makes you a happy and fulfills your wish on your dress.</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="campus-col">
+            <div class="image-wrapper">
+              <a href="{% url 'womens' %}"><img src="{% static 'l4.jpg' %}" alt="Women Dress"></a>
+            </div>
+            <div class="layer">
+              <h3>Women Wear</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="campus-col">
+            <div class="image-wrapper">
+                <a href="{% url 'mens' %}"><img src="{% static 'l12.jpg' %}" alt="Men Dress"></a>
+            </div>
+            <div class="layer">
+              <h3>Men Wear</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="campus-col">
+            <div class="image-wrapper">
+                <a href="{% url 'kid' %}"><img src="{% static 'l9.jpg' %}" alt="Kids Dress"></a>
+            </div>
+            <div class="layer">
+              <h3>Kids Wear</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <section class="campus py-5">
+      <div class="container text-center">
+        <h2 class="display-4 font-weight-bold mb-4">Comfort Meets Style</h2>
+        <p class="lead mb-5">Explore a wide range of outfits that fulfill your fashion desires for every occasion.</p>
+        <div class="row justify-content-center">
+          <div class="col-md-4 mb-4">
+            <div class="card bg-light shadow">
+              <a href="{% url 'womens' %}">
+                <img src="{% static 'l4.jpg' %}" class="card-img-top" alt="Women Wear">
+                <div class="card-body">
+                  <h5 class="card-title">Women Wear</h5>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card bg-light shadow">
+              <a href="{% url 'mens' %}">
+                <img src="{% static 'l12.jpg' %}" class="card-img-top" alt="Men Wear">
+                <div class="card-body">
+                  <h5 class="card-title">Men Wear</h5>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card bg-light shadow">
+              <a href="{% url 'kid' %}">
+                <img src="{% static 'l9.jpg' %}" class="card-img-top" alt="Kids Wear">
+                <div class="card-body">
+                  <h5 class="card-title">Kids Wear</h5>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+   
+ 
+  <br><br>
+  <section class="course">
+    <h2 style="text-align:center;font-weight:bold;font-size:40px;">Dress Types</h2>
+      <h3 style="text-align:center;">Top rated Traditional</h3><br><br><br>
+      
+    <div class="container">
+      <h2>Womens Wear</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image" >
+          </div>
+          <div class="course-col">
+            <h3>Traditional wear</h3>
+            <p>Traditional Wear which can be wore on family members wedding or your own wedding and make yourself beautiful than other's.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+          
+            <h3>PartyWear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+           
+            <h3>Dailywear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'l9.jpg' %}" alt="Gym Image">
+          </div>
+            <div class="course-col">
+             
+              <h3>Weddingwear</h3>
+              <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="container">
+      <h2>Mens Wear</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image" >
+          </div>
+          <div class="course-col">
+           
+            <h3>Traditional wear</h3>
+            <p>Traditional Wear which can be wore on family members wedding or your own wedding and make yourself beautiful than other's.
+            </p>0
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+          
+            <h3>PartyWear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+           
+            <h3>Dailywear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'l9.jpg' %}" alt="Gym Image">
+          </div>
+            <div class="course-col">
+             
+              <h3>Weddingwear</h3>
+              <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <br><br>
+    <div class="container">
+      <h2>Kids Wear</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image" >
+          </div>
+          <div class="course-col">
+            
+            <h3>Traditional wear</h3>
+            <p>Traditional Wear which can be wore on family members wedding or your own wedding and make yourself beautiful than other's.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+            
+            
+            
+            <h3>PartyWear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'a18.jpg' %}" alt="Gym Image">
+          </div>
+          <div class="course-col">
+            
+            <h3>Dailywear</h3>
+            <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+            
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="image-wrapper1">
+            <img src="{% static 'l9.jpg' %}" alt="Gym Image">
+          </div>
+            <div class="course-col">
+             
+              
+              <h3>Weddingwear</h3>
+              <p>Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.</p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  
+<br><br><br><br>
+  
+
+  <section class="cta"> 
+    <div class="container" >
+      <p style="text-align:center;font-size:40px;font-weight:bold;">FOR MORE  INFORMATION</p>
+      <h3 style="text-align:center;"><a href="#" class="btn btn-primary">CONTACT US</a></h3>
+    </div>
+  </section>
+
+ <footer class="footer">
+    <div class="container">
+      <h4>ABOUT US</h4>
+      <p>
+        <ion-icon name="logo-facebook"></ion-icon>
+        <ion-icon name="logo-instagram"></ion-icon>
+        <ion-icon name="logo-twitter"></ion-icon>
+      </p>
+    </div>
+  </footer> 
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  
+</body>
+</html>
+ {% endcomment %}
+{% load static %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dress Frenzy – Fashion for Everyone</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d81b60;
+      font-family: cursive;
+    }
+    .search-bar {
+      flex: 1;
+      margin: 0 40px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 20px;
+    }
+    .navbar {
+      display: flex;
+      background-color: #aa336a;
+      padding: 15px 40px;
+      color: white;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fce4ec;
+      padding: 60px 40px;
+    }
+    .hero-text {
+      max-width: 50%;
+    }
+    .hero-text h1 {
+      font-size: 40px;
+      color: #880e4f;
+    }
+    .hero-text button {
+      padding: 12px 25px;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .hero-img img {
+      width: 350px;
+      border-radius: 12px;
+    }
+    a :hover{
+      transform: scale(1.05);
+      transition: transform 0.3s;
+      
+    }
+
+    a{
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Dress Frenzy</div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for Dresses, Brands, Styles...">
+  </div>
+  <div class="icons">
+    ❤️ 🛍️ 👤
+  </div>
+</header>
+
+<div class="navbar">
+  <div><strong>Categories</strong></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Elegant Dresses for Every Occasion</h1>
+    <p>Explore our new arrivals in party wear, casual, ethnic, and more!</p>
+    <button>Shop Now →</button>
+  </div>
+  <div class="hero-img">
+  
+    <img src="./image4.jpg" alt="Fashion Banner">
+  </div>
+</section>
+<!-- Featured Categories -->
+<section style="padding: 60px 40px; background-color: #fff5f8;">
+  <h2 style="text-align: center; color: #880e4f; margin-bottom: 40px;">Featured Categories</h2>
+  <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;">
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'tradition.jpg' %}" alt="Traditional Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Traditional</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'partywear.jpg' %}" alt="Party Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Party</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'casualwear.jpg' %}" alt="Casual Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Casual</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'weddingwear.jpg' %}" alt="Wedding Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Wedding</h3></a>
+    </div>
+  </div>
+</section>
+
+<!-- Product Highlights -->
+<section style="padding: 60px 40px; background-color: #fce4ec;">
+  <h2 style="text-align: center; color: #880e4f; margin-bottom: 40px;">Trending Now</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="{% static 'casualwear.jpg' %}" alt="Dress 1" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Rose Gown</h4></a>
+     
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="./floral kurthi.jpg" alt="Dress 2" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Floral Kurti</h4></a>
+     
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="./saree.jpg" alt="Dress 3" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Elegant Saree</h4></a>
+    
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="./westerndress.jpg" alt="Dress 4" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Western Dress</h4></a>
+    
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background-color: #aa336a; color: white; padding: 40px 40px; text-align: center;">
+  <p style="margin-bottom: 10px;">&copy; 2025 Dress Frenzy. All rights reserved.</p>
+  <div style="margin-bottom: 10px;">
+    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Privacy Policy</a> |
+    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Terms of Service</a>
+  </div>
+  <div style="font-size: 20px;">❤️ 🛍️ 👗</div>
+</footer>
+
+</body>
+</html>
+

@@ -1,0 +1,628 @@
+{% comment %} <!DOCTYPE html>
+<html>
+<head>
+    <title>Dress Catalog</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.5;
+            background-color: #f8f8f8;
+        }
+
+        /* Header */
+        header {
+            background-color: #0e0907;
+            padding: -14px;
+            color: #fff;
+            text-align: center;
+        }
+
+        /* Dress Container */
+        .dress-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Dress Card */
+        .dress-card {
+            width: calc(33.33% - 20px);
+            margin-bottom: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: #fff;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .dress-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dress-image {
+            width: 100%;
+            height: 500px; /* Update the desired height */
+            object-fit: cover;
+        }
+
+        .dress-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+
+        .dress-info h3 {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p {
+            margin-bottom: 10px;
+        }
+
+        .dress-info p.price {
+            font-weight: bold;
+        }
+        .nav{
+            background-color: #0e0907; 
+            color: #fff;
+            position: sticky;
+            margin-top:-10px;
+           
+            
+        }
+        nav ul{
+            list-style-type: none;
+            margin: 5px;
+            padding: 0;
+            overflow:hidden;
+        }
+        nav li{
+            float: right;
+        }
+        nav li .b{
+            display: inline-block;
+            padding: 30px 20px;
+            color: #fff;
+            background-color:#0e0907;
+            font-size: 22px;
+            border:none;
+            text-decoration:none;
+        }
+        nav li .b:hover{
+            background-color: #555;
+        }
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+        a{
+            color:white;
+            text-decoration:none;
+            {% comment %} display:none; 
+        /* Responsive Styles */
+        @media (max-width: 960px) {
+            .dress-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dress-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<script>
+    function displayblock(){
+        document.getElementById('booking').style.display='none';
+    }
+</script>
+<body>
+    <header>
+        <h1>Dress Catalog</h1>
+        
+        <div class="nav">
+            <nav>
+                <form  method="POST" action="womentypeofdress">
+                    {% csrf_token %}
+                <ul> 
+                    {% comment %} <li><a href="traditional">Traditional</a></li>
+                    <li><a href="dailywear">Dailywear</a></li> 
+                   <li><a href="nightdress">Nightdress</a></li>
+                     {% comment %} <li><a href="booklist">Issue or Return</a></li>
+                     <li><a href="issueview">ReturnBook</a></li> 
+                    <li><a href="booklist">issueview</a></li> 
+                    <li><a href="partywear">PartyWear</a></li>
+                    <li><a href="weddingwear">WeddingWear</a></li>
+                    
+                     <li><button type="submit" class="b"><a href="logout1">Logout</a></button></li>
+                     <li><button type="submit" class="b" name="type" value="traditional">Traditional</button></li>
+                    <li><button type="submit" class="b" name="type" value="dailywear">Dailywear</button></li> 
+                   <li><button type="submit" class="b" name="type" value="nightdress">Nightdress</button></li>
+                     {% comment %} <li><a href="booklist">Issue or Return</a></li>
+                     <li><a href="issueview">ReturnBook</a></li> 
+                    <li><a href="booklist">issueview</a></li>  
+                    <li><button type="submit" class="b" name="type" value="partywear">PartyWear</button></li>
+                    <li><button type="submit" class="b" name="type" value="weddingwear">WeddingWear</button></li>
+                    
+                </ul>
+            </form>
+            </nav>
+        </div>
+   
+           
+    </header>
+    <div class="dress-container">
+        {% for dress in dresses %}
+        <div class="dress-card">
+            <img class="dress-image" src="{{ dress.image.url }}" alt="{{ dress.name }}"//maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js>
+            <div class="dress-info">
+                <h3>{{ dress.name }}</h3>
+                <p>{{ dress.description }}</p>
+                <p class="price">Price: ${{ dress.price }}</p>
+                 <form method="POST" action="booking"> 
+                    {% csrf_token %} 
+                    <input type="hidden" value="{{dress.dressid}}" name="id"/>
+                    <button type="submit" class="type" name="book">Book Now</button>
+                </form>
+            </div>
+            
+        </div>
+        {% endfor %}
+    </div>
+    {% comment %} <div id="booking" style="display:none;">
+        <form action="/sendotp" method="POST">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required/><br><br>
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required/><br><br>
+            <label for="name">Phone Number:</label>
+            <input type="tel" id="phone" name="pno" required/><br><br>
+            <label for="delivery_address">Delivery Address:</label><br><br>
+            <textarea  id="delivery_address" name="delivery_address" rows="4" required></textarea><br><br>
+            <button type="submit" name="btn" value="b2">Book dress</button>
+            
+        </form>
+    </div> 
+    <!-- <div class="container" id="otp" style="display: none;">
+        <form method="POST" action="/sendotp">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+            </div> 
+            <input type="hidden"  name="email" value="{{ email }}">
+            <button type="submit" class="btn btn-primary">Send Mail</button>
+        </form>
+    </div> -->
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>
+
+ {% endcomment %}
+ {% comment %} <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Dress Catalog</title>
+     <!-- Add your custom CSS here -->
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+     <style>
+         /* Custom CSS for your dress website */
+         body {
+             background-color: #f5f5f5;
+             font-family: Arial, sans-serif;
+         }
+ 
+         header {
+             background-color: #ffffff;
+             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+             padding: 20px 0;
+         }
+ 
+         .navbar {
+             background-color: #ffffff;
+             border: none;
+             margin-bottom: 20px;
+         }
+ 
+         .navbar .nav-item {
+             margin: 0 15px;
+         }
+ 
+         .navbar .nav-item button {
+             background-color: #ff3366;
+             color: #ffffff;
+             border: none;
+             border-radius: 5px;
+             padding: 10px 20px;
+             cursor: pointer;
+             font-size: 16px;
+             transition: background-color 0.3s ease;
+         }
+ 
+         .navbar .nav-item button:hover {
+             background-color: #ff0055;
+         }
+ 
+         .dress-card {
+             background-color: #ffffff;
+             border: 1px solid #e0e0e0;
+             border-radius: 10px;
+             padding: 20px;
+             margin-bottom: 20px;
+             transition: box-shadow 0.3s ease;
+         }
+ 
+         .dress-card:hover {
+             box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+         }
+ 
+         .dress-image {
+             max-width: 100%;
+             height: auto;
+             border-radius: 10px;
+         }
+ 
+         .dress-info h3 {
+             font-size: 1.5rem;
+             margin-top: 10px;
+             color: #333333;
+         }
+ 
+         .dress-info p {
+             font-size: 1rem;
+             color: #555555;
+         }
+ 
+         .price {
+             font-size: 1.2rem;
+             font-weight: bold;
+             color: #ff3366;
+             margin-top: 10px;
+         }
+ 
+         .btn-book {
+             background-color: #ff3366;
+             color: #ffffff;
+             border: none;
+             border-radius: 5px;
+             padding: 10px 20px;
+             cursor: pointer;
+             font-size: 16px;
+             transition: background-color 0.3s ease;
+         }
+ 
+         .btn-book:hover {
+             background-color: #ff0055;
+         }
+     </style>
+ </head>
+ <body>
+     <header>
+         <div class="container">
+             <div class="row justify-content-center">
+                 <div class="col-md-6">
+                     <form method="POST" action="womentypeofdress">
+                         {% csrf_token %}
+                         <ul class="navbar justify-content-center list-unstyled">
+                             <li class="nav-item">
+                                 <button type="button" class="btn"><a href="logout1" style="color:black;text-decoration:none;">Logout</a></button>
+                             </li>
+                             <li class="nav-item">
+                                 <button type="submit" class="btn" name="type" value="nightdress">Nightdress</button>
+                             </li>
+                             <li class="nav-item">
+                                 <button type="submit" class="btn" name="type" value="traditional">Traditional Dress</button>
+                             </li>
+                             <li class="nav-item">
+                                 <button type="submit" class="btn" name="type" value="dailywear">Dailywear</button>
+                             </li>
+                             <li class="nav-item">
+                                 <button type="submit" class="btn" name="type" value="partywear">Party Wear</button>
+                             </li>
+                             <li class="nav-item">
+                                 <button type="submit" class="btn" name="type" value="weddingwear">Wedding Wear</button>
+                             </li>
+                         </ul>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </header>
+ 
+     <div class="container mt-4">
+         <div class="row">
+             {% for dress in dresses %}
+             <div class="col-md-4">
+                 <div class="dress-card">
+                     <img class="dress-image" src="{{ dress.image.url }}" alt="{{ dress.name }}">
+                     <div class="dress-info">
+                         <h3>{{ dress.name }}</h3>
+                         <p>{{ dress.description }}</p>
+                         <p class="price">Price: ${{ dress.price }}</p>
+                         <form method="POST" action="booking">
+                             {% csrf_token %}
+                             <input type="hidden" value="{{ dress.dressid }}" name="id"/>
+                             <button type="submit" class="btn btn-book" name="book">Book Now</button>
+                         </form>
+                     </div>
+                 </div>
+             </div>
+             {% endfor %}
+         </div>
+     </div>
+ 
+     <!-- Bootstrap JS (optional) -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+ 
+     <!-- Your custom JavaScript here (if needed) -->
+ </body>
+ </html> {% endcomment %}
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress Catalog</title>
+    <!-- Add your custom CSS here -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+      
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+       
+        /* Custom CSS for your dress website */
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 4px 0;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            border: none;
+            margin-bottom: 20px;
+            flex-wrap: nowrap; /* Prevent navbar items from wrapping */
+        }
+
+        .navbar .nav-item {
+            margin: 0 15px;
+        }
+
+        .navbar .nav-item button {
+            background-color: #ff3366;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 150px; /* Set a fixed width for all buttons */
+        }
+
+        .navbar .nav-item button:hover {
+            background-color: #ff0055;
+        }
+
+        .dress-card {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .dress-card:hover {
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .dress-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .dress-info h3 {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #333333;
+        }
+
+        .dress-info p {
+            font-size: 1rem;
+            color: #555555;
+        }
+        .head{
+            font-family: 'Dancing Script', cursive; 
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ff3366;
+            margin-top: 10px;
+        }
+
+        .btn-book {
+            background-color: #ff3366;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Set a fixed width for all buttons */
+        }
+
+        .btn-book:hover {
+            background-color: #ff0055;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <form method="POST" action="womentypeofdress">
+                        {% csrf_token %}
+                        <ul class="navbar justify-content-center list-unstyled">
+                            
+                            <div class="head">
+                                <pre class="head"><h1 style="margin-left:-119px;padding-right:70px;">
+                    Love 
+                         In
+                            Style</h1></pre></div>
+                            
+                            <li class="nav-item">
+                                <button type="submit" class="btn" name="type" value="nightdress" >Nightdress</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" class="btn" name="type" value="traditional">Tradition</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" class="btn" name="type" value="dailywear">Dailywear</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" class="btn" name="type" value="partywear">PartyWear</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="submit" class="btn" name="type" value="weddingwear">WeddingWear</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn"><a href="logout1" style="color:white;text-decoration:none;">Logout</a></button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {% comment %} <div class="container mt-4">
+        <div class="row">
+            {% for dress in dresses %}
+            <div class="col-md-4">
+                <div class="dress-card">
+                    <img class="dress-image" src="{{ dress.image.url }}" alt="{{ dress.name }}">
+                    <div class="dress-info">
+                        <p class="title"><span style="text-transform:uppercase;"><b>{{ dress.title }}</b></spam></p>
+                            
+<label>Dress Available:</label>
+                    {% for size in dress.dress_size.all %}
+                        <input type="radio" name="dress_size" value="{{ size.size }}">
+                        <label>{{ size.size }}</label><br>
+                    {% endfor %} 
+                        <p class="price">Price: ${{ dress.price }}</p>
+                        <h6>{{ dress.description }}</h6>
+                        <form method="POST" action="booking">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ dress.dressid }}" name="id"/>
+                            <button type="submit" class="btn btn-book" name="book">Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> {% endcomment %}
+    <div class="container mt-4">
+        <div class="row">
+            {% for dress in dresses %}
+            <div class="col-md-4">
+                <div class="dress-card">
+                    <img class="dress-image" src="{{ dress.image.url }}" alt="{{ dress.name }}">
+                    <div class="dress-info">
+                        <p class="title"><span style="text-transform: uppercase;"><b>{{ dress.title }}</b></span></p>
+                        
+                        
+
+
+                        <p class="price">Price: ${{ dress.price }}</p>
+                        <h6>{{ dress.description }}</h6>
+                        <form method="POST" action="booking">
+                            {% csrf_token %}
+                            <label for="dress_size">Dress Available:</label>
+                        <div id="dress_size">
+                            {% for size in dress.dress_size %}
+                                <input type="radio" name="dress_size" value="{{ size }}">{{size}}<br>
+                            {% endfor %}
+                        </div>
+                            <input type="radio" name="dress_size" value="{{ size }}" style="display:none;">
+                            <input type="hidden" value="{{ dress.dressid }}" name="id"/>
+                            {% comment %} <input type="hidden" value="{{size}}" name="dress_size"/> {% endcomment %}
+                            <button type="submit" class="btn btn-book" name="book">Book Now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript here (if needed) -->
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>

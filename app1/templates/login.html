@@ -1,0 +1,196 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body class="bdy">
+        <center class="c">
+            <h1 name="head" >Log in</h1><br/><br/></body>
+        <div class="content">
+            <div class="text">Login Form</div>
+            <form method="POST" action="/login">
+                {% csrf_token %}
+                <div class="field">
+                    <span class ="fa fa-user"></span>
+                <input type="text" placeholder="Please enter name " name="name"/><br/><br/>
+                </div>
+                <div class="field">
+                    <span class ="fa fa-user"></span>
+                <input type="text" placeholder="Please enter email " name="email"/><br/><br/>
+                </div>
+                <div class="field">
+                    <span class ="fa fa-user"></span>
+                <input type="password" placeholder="Enter password " name="password"/><br/><br/>
+            
+                <button type="submit">Log in</button>
+                <div class="or">Or</div>
+                <div class="icon-button">
+                    <span class="facebook"><i class="fa fa-facebook"></i><a href="image">Forgot password</a></span></div>
+        
+                </div>
+    
+            </form>
+        </center>
+    
+</body>
+</html> {% endcomment %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .bdy {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .c {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .content {
+            max-width: 432px;
+            margin: 83px auto;
+            padding: 65px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .field {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .fa {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+            color: #ccc;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px 40px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .or {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .icon-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .facebook {
+            background-color: #3b5998;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .facebook i {
+            margin-right: 5px;
+        }
+
+        .facebook a {
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .facebook:hover {
+            background-color: #2d4373;
+        }
+    </style>
+</head>
+<body>
+    <body class="bdy">
+        <center class="c">
+            
+        </center>
+        <div class="content">
+            <div class="text">Login Form</div>
+            <form method="POST" action="/login">
+                {% csrf_token %}
+                {% comment %} <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" +placeholder="Please enter name" name="name" required>
+                </div> {% endcomment %}
+               <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="text" placeholder="Please enter email" name="email" required>
+                </div> 
+                <div class="field">
+                    <span class="fa fa-user"></span>
+                    <input type="password" placeholder="Enter password" name="password" required>
+                </div>
+                <button type="submit">Log in</button>
+                <div class="or">Or</div>
+                <div class="icon-button">
+                    <span class="facebook">
+                        <i class="fa fa-facebook"></i><a href="/forgotpass">Forgot password</a>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </body>
+    {% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>

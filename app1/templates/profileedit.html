@@ -1,0 +1,237 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profiles</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+ <script>
+    function enableedit(){
+        document.getElementById("demo").removeAttribute("readonly");
+        document.getElementById("editbutton").style.color="red";
+        document.getElementById("savebutton").style.display="inline";
+    }
+    function savechanges(){
+        document.getElementById('demo').setAttribute("readonly");
+        document.getElementById('editbutton').style.display="inline";
+        document.getElementById('savebutton').style.display="none";
+    }
+       
+</script> 
+ <style>
+    .profile-img {
+        width: 100px;
+        height: 400px; /* Update the desired height */
+        object-fit: cover;
+    } 
+    .card-body {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    } 
+    button{
+        height:50px;
+        width:150px;
+    }
+</style> 
+
+<body>
+<form method="POST" action="/profileedit" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container mt-4">
+    <h1>User Profiles</h1>
+    <div class="row">
+        {% for profile in profiles %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <input type="text"  id="demo" class="card-title"  value="{{ profile.user.first_name }}" name="name" readonly />
+                    <input type="text" class="card-text" name="mail" value="{{ profile.user.email }}" readonly/>
+                    <input type="file" id="demo"  src="{{ profile.user_image.url }}" name="img" alt="{{profile.user_image.name}}"readonly/>
+                    <textarea class="card-text" id="demo"  name="bio" readonly ></textarea>
+                    <!-- Add more profile information here --><br>
+                    <button type="button" onclick="enableedit()" id="editbutton" name="btn">Edit</button>
+                    <button type="submit" onclick="savechanges()" id="savebutton" name="btn" value="b1" style="display:none;">Save</button>
+                   
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and other scripts if needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</form>
+</body>
+</html>  {% endcomment %}
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .profile-card {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            background-color: #f8f8f8;
+        }
+
+        .profile-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .profile-info {
+            margin-top: 20px;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+        }
+
+        .profile-bio {
+            margin-top: 20px;
+        }
+
+        .profile-bio textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .view-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+
+<body>
+ 
+    
+<div class="container mt-4">
+    <h1 class="text-center">User Profiles</h1>
+    <div class="row">
+        {% for profile in profiles %}
+        <div class="col-md-4 mb-4">
+            <form method="POST" action="/profileedit" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="profile-card">
+                    <img class="profile-image" name="image{{ forloop.counter }}" src="{{ profile.user_image.name }}" alt="Image" name="image">
+                    <label for="img{{ forloop.counter }}" class="custom-file-upload">
+                        Custom Upload
+                    </label>
+                    <input type="file" id="img{{ forloop.counter }}" class="file" name="image" style="display:none";>
+                </div>
+                <div class="profile-info">
+                    <p><strong>Name:</strong><input type="text" value="{{profile.user.first_name }}" id="name" name="name" readonly/></p>
+                    <p><strong>Email:</strong><input type="text" value="{{ profile.user.email }}" name="email" readonly/></p>
+                    <p><strong>Contact No:</strong><input type="text" value="{{ profile.contactno }}" name="contactno" readonly/></p>
+                </div>
+                <div class="profile-bio">
+                    <textarea id="demo" name="bio" readonly>{{ profile.bio }}</textarea>
+                </div>
+                <input type="hidden" value="{{ profile.user.email }}" name="email">
+                <button type="button" class="edit_button" data-email="{{ profile.user.email }}">Edit</button>
+                <button type="submit" class="save_button" style="display:none;">Save</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $(".edit_button").click(function(){
+            var email = $(this).data("email");
+            console.log(email);
+            $("#name").removeAttr("readonly");
+            $("[name='email'][value='"+email+"']").removeAttr("readonly");
+            $("[name='contactno'][value='"+email+"']").removeAttr("readonly");
+            $(".save_button[data-email='"+email+"']").show();
+            $(this).hide();
+        });
+    });
+</script>
+</body>
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center">User Profiles</h1>
+    <div class="row">
+        {% for profile in profiles %}
+        <div class="col-md-4 mb-4">
+            <form method="POST" action="/profileedit" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="profile-card">
+                    <img class="profile-image" name="image{{ forloop.counter }}" src="{{ profile.user_image.name }}" alt="Image" name="image">
+                    <label for="img{{ forloop.counter }}" class="custom-file-upload">
+                        Custom Upload
+                    </label>
+                    <input type="file" id="img{{ forloop.counter }}" class="file" name="image" style="display:none";>
+                </div>
+                <div class="profile-info">
+                    <p><strong>Name:</strong><input type="text" value="{{profile.user.first_name }}" class="name" name="name" readonly/></p>
+                    <p><strong>Email:</strong><input type="text" value="{{ profile.user.email }}" class="email" name="email" readonly/></p>
+                    <p><strong>Contact No:</strong><input type="text" value="{{ profile.contactno }}" class="contactno" name="contactno" readonly/></p>
+                    <p><strong>Location:</strong><input type="text" value="{{ profile.location }}" class="location" name="location" readonly/></p>
+                </div>
+                <div class="profile-bio">
+                    <textarea id="demo" name="bio" readonly>{{ profile.bio }}</textarea>
+                </div>
+                
+                <input type="hidden" value="{{ profile.user.email }}" name="email">
+                <button type="button" class="edit_button" data-email="{{ profile.user.email }}">Edit</button>
+                <button type="submit" class="save_button" >Save</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".edit_button").click(function(){
+            var email = $(this).data("email");
+            $(this).closest("form").find(".name, .email, .contactno").removeAttr("readonly");
+            $(".save_button[data-email='"+email+"']").show();
+            $(this).hide();
+        });
+    });
+</script>
+</body>
+</html>

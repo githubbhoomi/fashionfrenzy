@@ -1,0 +1,153 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Signup</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        #full {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+      }
+
+        .model {
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            max-width: 489px;
+            width: 100%;
+        }
+
+        .model h1 {
+            text-align: center;
+        }
+
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        .signupbtn {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .signupbtn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Custom style for the file input */
+        .custom-file-input {
+            visibility: hidden;
+            width: 0;
+            position: absolute;
+        }
+
+        .custom-file-label::after {
+            content: "Select Image";
+        }
+
+        .custom-file-input[aria-invalid="true"] ~ .custom-file-label::after {
+            content: "Invalid file";
+        }
+    </style>
+</head>
+<body>
+    <div id="full">
+        <div class="model">
+            <form style="border: 0px solid #ccc" method="POST" action="/registration" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="container">
+                    <h1>SIGN UP</h1>
+                    <div class="form-group">
+                        <input type="text" placeholder="Enter name" name="name" required>
+                    </div>
+                    {% comment %} <div class="form-group">
+                        <label for="image">Image:</label>
+                        <input type="file" id="image" name="image">
+                    </div> {% endcomment %}
+            
+                    <div class="form-group">
+                        <input type="email" placeholder="Enter an email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Enter password" name="psw1" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Confirm password" name="psw2" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" placeholder="Contact Number" name="cno" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Location" name="location" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="image" name="image" placeholder="choose a image" required>
+                            <label class="custom-file-label" for="image"></label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary signupbtn">Sign Up</button>
+                </div>
+            </form>
+            <br>
+            <div style="float: left;width: 44%;"><hr/></div>
+            <div style="float: right;width:44%;"><hr/></div>
+            <p class="text-center">or</p>
+            <br>
+            <div class="text-center">
+                <label>Already have an account? <a href="/login">Login</a></label>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>
+

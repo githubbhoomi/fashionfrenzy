@@ -1,0 +1,269 @@
+{% comment %} {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+   
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="./college.html" img src=""></a>
+            <div class="nav-links">
+                <i class="fa fa-times" aria-hidden="true"></i>
+
+    
+                <ul>
+                    <li><a href="registration">Registration</a></li>
+                    
+                    <li><a href="image">Add</a></li>
+                   
+                    <li><a href="{% url 'delete1' %}">Delete</a></li>
+                    <li><a href="{% url 'userprofiles' %}">EditProfile</a></li>
+                    <li><a href="/logout1">Logout</a></li>
+                </ul>
+            </div>
+            <i class="fa fa-bars" aria-hidden="true"></i>
+
+            </nav>
+            <div class="text">
+            <h1>OUTFIT</h1>
+            <p>Make yourself different</p>
+            <a href="{% static 'images/d1.jpg' %}" class="btn">visit us to know more</a>
+            </div>
+    </section>
+    <section class="course">
+        <h1>Dress Types</h1>
+        <p>TOP RATED Traditional</p>
+        <div class="row">
+            <div class="course-col">
+                <h3>Traditional wear</h3>
+                <p>
+                    Traditional Wear which can be wore on family members wedding or your own wedding and make yourself beautiful than other's.
+                    
+                </p>
+            </div>
+            <div class="course-col">
+                <h3>PartyWear</h3>
+                <p>
+                    Party Wear is where you can Wear any party like birthaday or new year party or other.Make yourself attracted to Others.
+                
+                </p>
+            </div>
+            <div class="course-col">
+                <h3>Skirt</h3>
+                <p>
+                    Skirt which will make you feel comfortable and it makes you look like a pretty girl.
+                </p>
+           
+        </div>
+    </section>
+    <section class="campus">
+        <h1>OUR WEBSITE</h1>
+        <P>Fulfill your wish on wearing all tyoe of dress<br>
+            Yoyu can buy a any type of dresses which will makes you a happy and fulfills your wish on your dress.</P>
+        <div class="row">
+            <div class="campus-col">
+                <img src="{% static 'images/t4.jpg' %}" >
+                <div class="layer">
+                    <h3>Traditional</h3>
+                </div>
+            </div>
+            <div class="campus-col">
+                <img src="{% static 'images/w1.jpg' %}" >
+                <div class="layer">
+                    <h3>WeddingWear</h3>
+                </div>
+            </div>
+            <div class="campus-col">
+                <img src="{% static 'images/a5.jpg' %}" >
+                <div class="layer">
+                    <h3>Anarkali</h3>
+                </div>
+            </div>
+        </div>
+        </P>
+    </section>
+
+    <section class="facilities">
+        <h1>OUR COLLECTIONS</h1>
+        <p>We are providing all types of outfit with good quality.</p>
+
+        <div class="row">
+            
+            <div class="faci-col">
+                <img src="{% static 'images/s2.jpg' %}">
+                <!-- <h3>LIBRARY</h3>
+                <p>while pursuing your degree you will need to use these online databases for writing
+                    papers, sources for projects, and as cross-references to material you learn in class
+                    or in your textbook.</p> -->
+
+            </div>
+
+            <div class="faci-col">
+                <img src="{% static 'images/t2.jpg' %}">
+                <!-- <h3>GYM</h3>
+                <p>Use these health and wellness tips for college students to keep your mind and body healthy
+                     now, with wellness practices that can offer a lifetime of value. </p> -->
+
+            </div>
+
+            <div class="faci-col">
+                <img src="{% static 'images/w4.jpg' %}">
+                <!-- <h3>SPORTS</h3>
+                <p>Sport pertains to any form of competitive physical activity or game [1] that aims to use,
+                maintain, or improve physical ability and skills while providing enjoyment to participants and,
+                in some cases, entertainment to spectators.</p> -->
+
+            </div>
+        </div>
+    </section>
+
+    <section  class="cta">
+        <h1>ENROLL FOR OUR VARIOUS ONLINE COURSES <br>ANYWHERE FROM KARNATAKA</h1>
+        <a href="" class="btn">CONTACT US</a>
+    </section>
+
+    <section class="footer">
+        <h4>ABOUT US</h4>
+        <P>
+            <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon name="logo-instagram"></ion-icon>
+           <ion-icon name="logo-twitter"></ion-icon>
+
+
+        </P>
+        
+    </section>
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+
+</body>
+                <li><a href="registration">Registration</a></li>
+                    
+                    <li><a href="image">Add</a></li>
+                   
+                    <li><a href="{% url 'delete1' %}">Delete</a></li>
+                    <li><a href="{% url 'userprofiles' %}">EditProfile</a></li>
+                    <li><a href="/logout1">Logout</a></li>
+</html> {% endcomment %}
+<!-- superuser_dashboard.html -->
+{%load static %}
+<!-- superuser_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Superuser Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Add your custom CSS and styles here */
+        body {
+            
+            font-family: Arial, sans-serif;
+        }
+        
+         
+        header {
+           
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
+        }
+        .navbar {
+            background-color: #fff;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .navbar ul {
+            list-style: none;
+        }
+        .navbar ul li {
+            display: inline;
+            margin-left: 20px;
+        }
+        .navbar ul li a {
+            text-decoration: none;
+        }
+        .dashboard-content {
+            padding: 20px;
+            {% comment %} background-image:linear-gradient(to bottom ,pink,white) ; {% endcomment %}
+            height:100%; 
+        }
+        .dashboard-card {
+            background-image: linear-gradient(to bottom,pink,white);
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        .user-info {
+            font-size: 1.2rem;
+        }
+        .user-stats {
+            font-size: 1.5rem;
+        }
+        button{
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        @media (min-width: 768px)
+        .container, .container-md, .container-sm {
+    max-width: 100%;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="registration">Registration</a></li>
+                <li><a href="image">Add</a></li>
+                   
+                    <li><a href="{% url 'delete1' %}">Delete</a></li>
+                    <li><a href="{% url 'userprofiles' %}">EditProfile</a></li>
+                    <li><a href="/logout1">Logout</a></li>
+                <!-- Add other navigation links as needed -->
+            </ul>
+        </nav>
+    </header>
+    
+      
+    <div class="container dashboard-content">
+        <h1>Welcome, Superuser</h1>
+        <p>This is your dashboard. You can manage dresses here.</p>
+        
+        <div class="dashboard-card">
+            <form method="POST" action="superview">
+                {% csrf_token %}
+                <h3>Dashboard Overview</h3>
+                <div class="user-info">
+                    Total Dresses Booked: <span class="user-stats">{{ total_dresses_booked }}</span><br>
+                    <button type="submit" name="btn" value="booked">VIEW</button>
+                </div><br><br>
+                <div class="user-info">
+                    No. Of Poster: <span class="user-stats">{{ users_logged_in }}</span><br>
+                    <button type="submit" name="btn" value="loggedview">VIEW</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Add more content for the superuser's dashboard as needed -->
+    </div>
+
+</body>
+</html>

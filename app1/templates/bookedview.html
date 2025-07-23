@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Booked Dresses</title>
+    <!-- Add Bootstrap CSS link here -->
+</head>
+<style>
+    .img{
+        height:300px;
+        width:200px;
+    }
+</style>
+<body>
+    <h1>Booked Dresses</h1>
+    <form method="POST" action="cancelorpay">
+        {% csrf_token %}
+    <table  cellspacing="2px" cellpadding="5px" style="line-height: 0.1px;" >
+       <tbody>
+            {% for booking in bookings %}
+            
+                        <tr >
+                         <td  rowspan="5"><img class="img" src="{{ booking.img.image.url }}" alt="{{ dress.name }}"/></td>
+                         <td></td>
+                     </tr>
+                     <tr>
+                     <td>Type :{{ booking.img.type }} </td>
+                 </tr>
+                        <tr>
+                         <td>size :{{ booking.img.dress_size }}</td>
+                        </tr>
+                        <tr>
+                         <td>Price : ${{ booking.img.price }}</td>
+                        </tr>
+                        <tr>
+                            <input type="hidden" name="email" value="{{booking.email}}" />
+                            <input type="hidden" name="id" value="{{ booking.img.dressid}}" />
+                            <td><button type="submit" name="btn" value='b1'>Cancel</button></td> 
+                            <input type="hidden" name="price" value="{{ booking.img.price}}" />
+                            <td><button type="submit" name="btn" value='b2'>Pay</button></td> </a>
+                        </tr>
+            
+            {% endfor %}
+            
+        </tbody>
+       <br>
+        <tfoot>
+           
+            <tr>
+                
+                <td><h2>Total Price:<h2></td>
+                <td><h3>${{ total}}<h3></td>
+            </tr>
+        </tfoot>
+    </table>
+    <!-- Add Bootstrap JS link here if needed -->
+</body>
+</html>
+{% comment %} <tr>
+                <td><img class="dress-image" src="{{ booking.img.image.url }}" alt="{{ dress.name }}"></td>
+                <th colspan="5">Type :</th>
+                <td>{{ booking.img.type }}</td>
+                <td>{{ booking.img.type }}</td><tr>
+                <th colspan="5">Type :</th>
+                <td>{{ booking.img.type }}</td> </tr>
+                {% comment %} <td><th>Type :</th></td>
+                </tr> {% endcomment %}
+            
+                {% comment %} <tr>
+                    <td rowspan="4"><img class="dress-image" src="{{ booking.img.image.url }}" alt="{{ dress.name }}"></td>
+                    <tr>{{ booking.img.type }}</tr>
+                    <tr>{{ booking.img.dress_size }}</tr>
+                    <td>${{ booking.img.price }}</td>
+                    <td><button type="submit" class="btn" >Cancel</button></td> {% endcomment %}
+

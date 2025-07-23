@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profiles</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .profile-card {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            background-color: #f8f8f8;
+        }
+
+        .profile-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .profile-info {
+            margin-top: 20px;
+        }
+
+        .profile-info p {
+            margin-bottom: 10px;
+        }
+
+        .profile-bio {
+            margin-top: 20px;
+        }
+
+        .profile-bio textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        .view-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center">User Profiles</h1>
+    <div class="row">
+        {% for profile in profiles %}
+        <div class="col-md-4 mb-4">
+            <div class="profile-card">
+                <img class="profile-img" src="{{ profile.user_image.url }}" alt="{{ profile.user_image.name }}">
+                <div class="profile-info">
+                    <p><strong>Name:</strong> {{ profile.user.first_name }}</p>
+                    <p><strong>Email:</strong> {{ profile.user.email }}</p>
+                    <p><strong>Contact No:</strong> {{ profile.contactno}}</p>
+                    <p><strong>Location:</strong> {{ profile.location}}</p>
+                </div>
+                <div class="profile-bio">
+                    <textarea readonly>{{ profile.bio }}</textarea>
+                </div>
+                <form method="POST" action="/view">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ profile.user.email }}" name="email">
+                    <button class="view-button" type="submit">View</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Include Bootstrap JS and other scripts if needed -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

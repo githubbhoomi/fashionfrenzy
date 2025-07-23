@@ -1,0 +1,287 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 10px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .btn-upload {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-upload:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" action="/image">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" value="{{id}}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" id="price" placeholder="Enter price" name="price">
+            </div>
+            <div class="form-group">
+                <label>Type:</label><br>
+                <select id="type" name="type">
+                    <option value="traditional">Traditional</option>
+                    <option value="skirt">Skirt</option>
+                    <option value="kurtha">Kurtha</option>
+                    <!-- Uncomment the following options if needed -->
+                    <!-- <option value="saree">Saree</option> -->
+                    <option value="partywear">Partywear</option>
+                    <option value="weddingwear">Weddingwear</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-upload">Upload</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html> {% endcomment %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dress Website</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+        }
+        
+        .form-group input[type="text"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+        
+        .form-group input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .btn-upload {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .btn-upload:hover {
+            background-color: #0056b3;
+        } /* Hide the default radio button */
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* Style the label as a button */
+        label.radio-button {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 13px;
+            background-color: #a7b7c2;
+            color: black;
+            cursor: pointer;
+            border-radius: 12px;
+            margin-right: 10px;
+        }
+
+        /* Style the label when the radio button is checked */
+        input[type="radio"]:checked + label.radio-button {
+            background-color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" enctype="multipart/form-data" action="/image">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" id="id" value="{{id}}" readonly/>
+            </div>
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title"/>
+            </div>
+            <div class="form-group">
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image">
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" id="price" placeholder="Enter price" name="price">
+            </div>
+            <div class="form-group" id="women">
+                <label>Type of dress:</label><br>
+                <select id="type" name="type" class="form-control">
+                    <option value="traditional">Traditional</option>
+                    {% comment %} <option value="skirt">Skirt</option>
+                    <option value="kurtha">Kurtha</option> {% endcomment %}
+                    <!-- Uncomment the following options if needed -->
+                    <!-- <option value="saree">Saree</option> -->
+                    <option value="dailywear">Dailywear</option>
+                    <option value="nightdress">Nightdress</option>
+                    <option value="partywear">Partywear</option>
+                    {% comment %} <option value="Functionwear">Functionwear</option> {% endcomment %}
+                    <option value="weddingwear">Weddingwear</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Dress for:</label><br>
+                <select id="dress_for" name="dress_for" class="form-control">
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="kids">Kids</option>
+                    <!-- Uncomment the following options if needed -->
+                    <!-- <option value="saree">Saree</option> -->
+                    {% comment %} <option value="partywear">Partywear</option>
+                    <option value="weddingwear">Weddingwear</option> {% endcomment %}
+                </select>
+            </div>
+            {% comment %} <div class="form-group">                   
+                <label>Dress Size:</label><br>
+            <input type="radio" id="size_small" name="dress_size" value="small">
+                    <label for="size_small" class="radio-button">Small</label>
+
+                    <input type="radio" id="size_medium" name="dress_size" value="medium">
+                    <label for="size_medium" class="radio-button">Medium</label>
+
+                    <input type="radio" id="size_large" name="dress_size" value="large">
+                    <label for="size_large" class="radio-button">Large</label>
+
+                    <input type="radio" id="size_extralarge" name="dress_size" value="extralarge">
+                    <label for="size_extralarge" class="radio-button">Extra Large</label>
+
+            </div> {% endcomment %}
+            <div class="form-group">
+            <label>Available Dress Size</label><br>
+            <label>
+                <input type="checkbox" name="size" value="small"> Small
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="size" value="medium"> Medium
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="size" value="large"> Large
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="size" value="extralarge"> Extralarge
+            </label>
+        </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea class="form-control" id="description" name="description" rows="4" ></textarea>
+            </div>
+            <a href="home"><button type="button" class="btn btn-primary btn-upload">Back</button></a>
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-primary btn-upload">Upload</button>
+            
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>
+
+       
+
+                

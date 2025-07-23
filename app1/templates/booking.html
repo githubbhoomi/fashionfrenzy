@@ -1,0 +1,103 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="booking" >
+        <form action="/sendotp" method="POST">
+            {% csrf_token %}
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" required/><br><br>
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" required/><br><br>
+            <label for="phoneno">Phone Number:</label>
+            <input type="tel" id="phone" name="pno" required/><br><br>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required/><br><br>
+            <label for="state">State:</label>
+            <input type="text" id="state" name="state" required/><br><br>
+            <label for="zipcode">Zipcode:</label>
+            <input type="text" id="zipcode" name="zipcode" min="6" max="6" required/><br><br>
+            <label for="delivery_address">Delivery Address:</label><br><br>
+            <textarea  id="delivery_address" name="delivery_address" rows="4" required></textarea><br><br>
+            <input type="hidden" value="{{id}}" name="dressid"/>
+            <button type="submit" name="btn" value="b2">Book dress</button>
+            
+        </form>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Dress</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Book a Dress</h2>
+                    </div>
+                    <div class="card-body">
+                        <form action="/sendotp" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="name">Your Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Your Email:</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number:</label>
+                                <input type="tel" class="form-control" id="phone" name="pno" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City:</label>
+                                <input type="text" class="form-control" id="city" name="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State:</label>
+                                <input type="text" class="form-control" id="state" name="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipcode">Zipcode:</label>
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" minlength="6" maxlength="6" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="delivery_address">Residential Address:</label>
+                                <textarea class="form-control" id="delivery_address" name="delivery_address" rows="4" required></textarea>
+                            </div>
+                            <input type="hidden" value="{{id}}" name="dressid">
+                            <input type="hidden" value="{{size}}" name="size">
+                            <button type="submit" class="btn btn-primary" name="btn" value="b2">Book Dress</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include Bootstrap JS (optional) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>
