@@ -400,7 +400,7 @@
  
      <!-- Your custom JavaScript here (if needed) -->
  </body>
- </html> {% endcomment %}
+ </html> 
  <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -575,7 +575,7 @@
             </div>
             {% endfor %}
         </div>
-    </div> {% endcomment %}
+    </div>
     <div class="container mt-4">
         <div class="row">
             {% for dress in dresses %}
@@ -600,7 +600,7 @@
                         </div>
                             <input type="radio" name="dress_size" value="{{ size }}" style="display:none;">
                             <input type="hidden" value="{{ dress.dressid }}" name="id"/>
-                            {% comment %} <input type="hidden" value="{{size}}" name="dress_size"/> {% endcomment %}
+                            {% comment %} <input type="hidden" value="{{size}}" name="dress_size"/>
                             <button type="submit" class="btn btn-book" name="book">Book Now</button>
                         </form>
                     </div>
@@ -615,6 +615,215 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
     <!-- Your custom JavaScript here (if needed) -->
+</body>
+{% if messages %}
+        <script>
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    alert("{{ message }}");
+                {% endif %}
+            {% endfor %}
+        </script>
+{% endif %}
+</html>
+{% endcomment %}
+
+
+
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dress Frenzy – Fashion for Everyone</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #fff;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #ddd;
+    }
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d81b60;
+      font-family: cursive;
+    }
+    .search-bar {
+      flex: 1;
+      margin: 0 40px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+    }
+    .icons {
+      display: flex;
+      gap: 20px;
+      font-size: 20px;
+    }
+    .navbar {
+      display: flex;
+      background-color: #aa336a;
+      padding: 15px 40px;
+      color: white;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #fce4ec;
+      padding: 60px 40px;
+    }
+    .hero-text {
+      max-width: 50%;
+    }
+    .hero-text h1 {
+      font-size: 40px;
+      color: #880e4f;
+    }
+    .hero-text button {
+      padding: 12px 25px;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .hero-img img {
+      width: 350px;
+      border-radius: 12px;
+    }
+    a :hover{
+      transform: scale(1.05);
+      transition: transform 0.3s;
+      
+    }
+
+    a{
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Dress Frenzy</div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search for Dresses, Brands, Styles...">
+  </div>
+  <div class="icons">
+    ❤️ 🛍️ 👤
+  </div>
+</header>
+
+<div class="navbar">
+  <div><strong>Categories</strong></div>
+  <div>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Elegant Dresses for Every Occasion</h1>
+    <p>Explore our new arrivals in party wear, casual, ethnic, and more!</p>
+    <button>Shop Now →</button>
+  </div>
+  <div class="hero-img">
+  
+    <img src="./skirt.jpg" alt="Fashion Banner">
+  </div>
+</section>
+<!-- Featured Categories -->
+<section style="padding: 60px 40px; background-color: #fff5f8;">
+  <h2 style="text-align: center; color: #880e4f; margin-bottom: 40px;">Featured Categories</h2>
+  <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;">
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'images/tradition.jpg' %}g" alt="Traditional Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Traditional</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'images/partywear' %}" alt="Party Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Party</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'images/casualwear.jpg' %}" alt="Casual Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Casual</h3></a>
+    </div>
+    <div style="text-align: center;">
+      <a href="./index.html">
+      <img src="{% static 'images/weddingwear' %}" alt="Wedding Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">Wedding</h3></a>
+    </div>
+  </div>
+</section>
+
+<!-- Product Highlights -->
+<section style="padding: 60px 40px; background-color: #fce4ec;">
+  <h2 style="text-align: center; color: #880e4f; margin-bottom: 40px;">Trending Now</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="{% static 'images/rosegown.jpg' %}" alt="Dress 1" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Rose Gown</h4></a>
+     
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="{% static 'images/floralkurthi.jpg' %}" alt="Dress 2" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Floral Kurti</h4></a>
+     
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="{% static 'images/saree.jpg' %}" alt="Dress 3" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Elegant Saree</h4></a>
+    
+    </div>
+    <div style="background: #fff; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.1);">
+      <a href="./index.html">
+      <img src="{% static 'images/westerndress.jpg' %}" alt="Dress 4" style="width: 100%; border-radius: 8px;">
+      <h4 style="color: #d81b60;">Western Dress</h4></a>
+    
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer style="background-color: #aa336a; color: white; padding: 40px 40px; text-align: center;">
+  <p style="margin-bottom: 10px;">&copy; 2025 Dress Frenzy. All rights reserved.</p>
+  <div style="margin-bottom: 10px;">
+    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Privacy Policy</a> |
+    <a href="#" style="color: white; margin: 0 10px; text-decoration: none;">Terms of Service</a>
+  </div>
+  <div style="font-size: 20px;">❤️ 🛍️ 👗</div>
+</footer>
+
 </body>
 {% if messages %}
         <script>

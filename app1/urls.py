@@ -22,8 +22,11 @@ from django.conf import settings
 
 
 urlpatterns = [
- path("",views.home,name="home"),
+path("",views.login,name="login"),
+path("login",views.login,name="login"),
+#  path("",views.home,name="home"),
  path("home",views.home,name="home"),
+ path("category/<str:type>",views.category,name="category"),
  path("men",views.men,name="men"),
  path("women",views.women,name="women"),
  path("kids",views.kids,name="kids"),
@@ -33,7 +36,7 @@ urlpatterns = [
     # path("Skirt",views.Skirt,name="Skirt"),
     # path("weddingwear",views.weddingwear,name="weddingwear"),
     path("registration",views.registration,name="registration"),
-    path("login",views.login,name="login"),
+    
     path("image",views.image,name="image"),
     path("delete",views.delete1,name="delete1"),
     path("deletedress",views.deletedress,name="deletedress"),

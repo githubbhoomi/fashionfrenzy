@@ -78,24 +78,39 @@ def login(request):
             else: 
                 print("not super")
                 django_login(request,user)
-                return render(request,'poster.html')
+                return render(request,'home.html')
         else:
             print("out")
-            return render(request,'login.html')
-    return render(request,'login.html')
+            return render(request,'home.html')
+    return render(request,'home.html')
+
+def category(request,type=None):
+    if request.method=="POST":
+        dress=Dresses.objects.filter(type=type)
+        context={"dresses":dress}
+        return render(request,'women.html',context)
+    return render(request,'women.html')
+
+
+
+
+
+
+
+
 
 def men(request):
-    dress=images.objects.filter(dress_for="men")
+    dress=Dresses.objects.filter(dress_for="men")
     context={"dresses":dress}
     return render(request,'men.html',context)
 
 def women(request):
-    dress=images.objects.filter(dress_for="women")
+    dress=Dresses.objects.filter(dress_for="women")
     context={"dresses":dress}
     return render(request,'women.html',context)
 
 def kids(request):
-    dress=images.objects.filter(dress_for="kids")
+    dress=Dresses.objects.filter(dress_for="kids")
     context={"dresses":dress}
     return render(request,'kids.html',context)
 
@@ -104,21 +119,26 @@ def mentypeofdress(request):
         if request.method=="POST":
             k=request.POST.get('type',"")  
             if 'traditional' in k:
-                dress=images.objects.filter(type="traditional",dress_for="men")
+                dress=Dresses.objects.filter(type="traditional",dress_for="men")
             if 'dailywear' in k:
-                dress=images.objects.filter(type="dailywear",dress_for="men")
+                dress=Dresses.objects.filter(type="dailywear",dress_for="men")
             if 'nightdress' in k:
-                dress=images.objects.filter(type="nightdress",dress_for="men")
+                dress=Dresses.objects.filter(type="nightdress",dress_for="men")
             if 'partywear' in k:
-                dress=images.objects.filter(type="partywear",dress_for="men")
+                dress=Dresses.objects.filter(type="partywear",dress_for="men")
             if 'weddingwear' in k:
-                dress=images.objects.filter(type="weddingwear",dress_for="men")
+                dress=Dresses.objects.filter(type="weddingwear",dress_for="men")
             context={"dresses":dress}
         return render(request,'men.html',context)
     except Exception :
         messages.success(request,"No dress is posted")
         return render(request,'men.html')
            
+
+
+
+
+
 
 def womentypeofdress(request):
     # try:
@@ -128,17 +148,17 @@ def womentypeofdress(request):
         k=request.POST.get('type',"")  
         print(k)
         if 'traditional' in k:
-            dress=images.objects.filter(type="traditional",dress_for="women")
+            dress=Dresses.objects.filter(type="traditional",dress_for="women")
         if 'dailywear' in k:
-            dress=images.objects.filter(type="dailywear",dress_for="women")
+            dress=Dresses.objects.filter(type="dailywear",dress_for="women")
         if 'nightdress' in k:
-            dress=images.objects.filter(type="nightdress",dress_for="women")
+            dress=Dresses.objects.filter(type="nightdress",dress_for="women")
         if 'partywear' in k:
-            dress=images.objects.filter(type="partywear",dress_for="women")
+            dress=Dresses.objects.filter(type="partywear",dress_for="women")
         if 'weddingwear' in k:
-            dress=images.objects.filter(type="weddingwear",dress_for="women")
+            dress=Dresses.objects.filter(type="weddingwear",dress_for="women")
         else:
-            dress=images.objects.filter(type="traditional",dress_for="women")
+            dress=Dresses.objects.filter(type="traditional",dress_for="women")
         context={"dresses":dress}
         print(dress)
         return render(request,'women.html',context)
@@ -147,21 +167,33 @@ def womentypeofdress(request):
     # except Exception :
     #     messages.success(request,"No dress is posted")
     return render(request,'women.html')
-           
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+@login_required
+def add_to_cart(request, dress_id):
+    user = request.user
+    dress = get_object_or_404(Dresses, id=dress_id)
+
+    cart_item, created = Cart.objects.get_or_create(user=user, dress=dress)
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('view_cart')  # Redirects to the cart page
 def kidstypeofdress(request):
     try:
         if request.method=="POST":
             k=request.POST.get('type',"")  
             if 'traditional' in k:
-                dress=images.objects.filter(type="traditional",dress_for="kids")
+                dress=Dresses.objects.filter(type="traditional",dress_for="kids")
             if 'dailywear' in k:
-                dress=images.objects.filter(type="dailywear",dress_for="kids")
+                dress=Dresses.objects.filter(type="dailywear",dress_for="kids")
             if 'nightdress' in k:
-                dress=images.objects.filter(type="nightdress",dress_for="kids")
+                dress=Dresses.objects.filter(type="nightdress",dress_for="kids")
             if 'partywear' in k:
-                dress=images.objects.filter(type="partywear",dress_for="kids")
+                dress=Dresses.objects.filter(type="partywear",dress_for="kids")
             if 'weddingwear' in k:
-                dress=images.objects.filter(type="weddingwear",dress_for="kids")
+                dress=Dresses.objects.filter(type="weddingwear",dress_for="kids")
             context={"dresses":dress}
         return render(request,'kids.html',context)
     except Exception :
@@ -169,44 +201,44 @@ def kidstypeofdress(request):
         return render(request,'kids.html')
 
 def womens(request):
-    dress=images.objects.filter(dress_for="women")
+    dress=Dresses.objects.filter(dress_for="women")
     context={"dresses":dress}
     return render(request,'traditional.html',context)
 
 def mens(request):
-    dress=images.objects.filter(dress_for="men")
+    dress=Dresses.objects.filter(dress_for="men")
     context={"dresses":dress}
     return render(request,'traditional.html',context)
 
 def kid(request):
-    dress=images.objects.filter(dress_for="kids")
+    dress=Dresses.objects.filter(dress_for="kids")
     context={"dresses":dress}
     return render(request,'traditional.html',context)
 
 # def kurtha(request):
-#     dress=images.objects.filter(type="kurtha")
+#     dress=Dresses.objects.filter(type="kurtha")
 #     context={"dresses":dress}
 #     return render(request,'kurtha.html',context)
 
 # def Partywear(request):
-#     dress=images.objects.filter(type="partywear")
+#     dress=Dresses.objects.filter(type="partywear")
 #     context={"dresses":dress}
 #     return render(request,'Partywear.html',context)
 
 # def Skirt(request):
-#     dress=images.objects.filter(type="skirt")
+#     dress=Dresses.objects.filter(type="skirt")
 #     context={"dresses":dress}
 #     return render(request,'Skirt.html',context)
 
 # def weddingwear(request):
-#     dress=images.objects.filter(type="weddingwear")
+#     dress=Dresses.objects.filter(type="weddingwear")
 #     context={"dresses":dress}
 #     return render(request,'weddingwear.html',context)
 
 
 def image(request):
     if True:
-        id=1 if  images.objects.count()==0 else images.objects.aggregate(max=Max('dressid'))["max"]+1
+        id=1 if  Dresses.objects.count()==0 else Dresses.objects.aggregate(max=Max('dressid'))["max"]+1
         context = {'id':id}
         if request.method=="POST":
             image=request.FILES['image']
@@ -246,7 +278,7 @@ def logout1(request):
     return render(request,'home.html')
 
 def delete1(request):
-    dress=images.objects.all()
+    dress=Dresses.objects.all()
     context={'dresses':dress}
     return render(request,'delete.html',context)
 
@@ -255,11 +287,11 @@ def deletedress(request):
     if request.method=="POST":
         id=request.POST.get('id')
         print(id)
-        dress=images.objects.get(dressid=id)
+        dress=Dresses.objects.get(dressid=id)
         print(dress)
         dress.delete()
     return redirect('delete1') 
-    # dress=images.objects.filter(dressid=id)
+    # dress=Dresses.objects.filter(dressid=id)
     # if dress is not None:
     #     messages.success(request,f"dress of this {id} deleted successfully")
     #     dress.delete()
@@ -275,11 +307,11 @@ def deletedress(request):
     
 def messagelib(request):
     type = request.GET.get('type')
-    dress=images.objects.filter(type=type)
+    dress=Dresses.objects.filter(type=type)
     context={'dress':dress}
     return render(request,'delete.html',context) 
         # print(id)
-    # dress=images.objects.get(dressid=id)
+    # dress=Dresses.objects.get(dressid=id)
     # print(dress)
         # dress.delete()
     # messages.success(request,f"dress of this {id} deleted successfully")
@@ -424,14 +456,14 @@ def view(request):
         email=request.POST.get('email')
         user=User.objects.get(username=email)
         print(user)
-        vuser=images.objects.filter(loggeduser=user).first()
+        vuser=Dresses.objects.filter(loggeduser=user).first()
         print(vuser)
         if vuser is None:
             messages.success(request,"No any Posts ")
         else:
             print(vuser,user)
             if str(vuser)==str(user):
-                img=images.objects.filter(loggeduser=vuser)
+                img=Dresses.objects.filter(loggeduser=vuser)
                 context={'dresses':img}
                 return render(request,'view.html',context)
     return render(request,'view.html')
@@ -483,8 +515,8 @@ def sendotp(request):
         # current_time = current_datetime.time()
         # date_object = date.fromisoformat(current_datetime)
         print(name,email,pno,city,state,zipcode,address,id)
-        dress=images.objects.filter(dressid=id,dress_size=size)
-        dress=images.objects.get(dressid=id)
+        dress=Dresses.objects.filter(dressid=id,dress_size=size)
+        dress=Dresses.objects.get(dressid=id)
         print("dress")
         user1=User.objects.filter(username=email,first_name=name).first()
         print(user1)
@@ -566,7 +598,7 @@ def profileedit(request):
 def bookeddress(request):
     user1=request.user
     print(user1)
-    user_images=images.objects.filter(loggeduser=user1)
+    user_images=Dresses.objects.filter(loggeduser=user1)
     print(user_images)
     booked_dress_list=[]
     for user_image in user_images:

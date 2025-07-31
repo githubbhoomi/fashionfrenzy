@@ -40,7 +40,7 @@ class profile(models.Model):
 
 
 
-class images(models.Model):
+class Dresses(models.Model):
     image=models.ImageField(upload_to='image',default=False)
     title=models.CharField(max_length=100)
     dressid=models.IntegerField(primary_key=True)
@@ -61,7 +61,7 @@ class images(models.Model):
 
 
 class booked(models.Model):
-    img=models.ForeignKey(images,on_delete=models.SET_NULL,null=True)
+    img=models.ForeignKey(Dresses,on_delete=models.SET_NULL,null=True)
     size=models.CharField(max_length=50)
     # bookeddress=models.CharField(max_length=100)
     name=models.CharField(max_length=100)
@@ -81,6 +81,16 @@ class booked(models.Model):
         super().save(*args, **kwargs)
         if self.img and self.img.image:
             resize_image(self.img.image.path)
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    dress = models.ForeignKey(Dresses, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.dress.title}"
 
     
 #    email=request.POST.get('email')
