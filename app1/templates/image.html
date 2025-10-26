@@ -188,7 +188,50 @@
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title"/>
             </div>
+           
+            
+            
             <div class="form-group">
+    <label>Dress for:</label><br>
+    <select id="dress_for" name="dress_for" class="form-control">
+        <option value="">-- Select --</option>
+        <option value="women">Women</option>
+        <option value="men">Men</option>
+        <option value="boykids">BoyDress</option>
+        <option value="girlkid">GirlDress</option>
+        <option value="homeacc">Home Accessories</option>
+        <option value="makeup">Make Up</option>
+        <option value="watch">Watch</option>
+        <option value="footwear">FootWear</option>
+        <option value="perfume">Perfume</option>
+        <option value="skincare">Skin Care Product</option>
+        <option value="gifts">Gifts</option>
+        <option value="jewellery">Jewellery</option>
+    </select>
+</div>
+
+<!-- Type of dress -->
+<div class="form-group" id="dress_type_div" style="display: none;">
+    <label>Type of dress:</label><br>
+    <select id="type" name="type" class="form-control">
+        <option value="traditional">Traditional</option>
+        <option value="dailywear">Dailywear</option>
+        <option value="nightdress">Nightdress</option>
+        <option value="partywear">Partywear</option>
+        <option value="weddingwear">Weddingwear</option>
+    </select>
+</div>
+
+<!-- Available sizes -->
+<div class="form-group" id="size_div" style="display: none;">
+    <label>Available Dress Size</label><br>
+    <label><input type="checkbox" name="size" value="small"> Small</label><br>
+    <label><input type="checkbox" name="size" value="medium"> Medium</label><br>
+    <label><input type="checkbox" name="size" value="large"> Large</label><br>
+    <label><input type="checkbox" name="size" value="extralarge"> Extra Large</label>
+</div>
+
+ <div class="form-group">
                 <label for="image">Image:</label>
                 <input type="file" id="image" name="image">
             </div>
@@ -196,73 +239,6 @@
                 <label for="price">Price:</label>
                 <input type="text" id="price" placeholder="Enter price" name="price">
             </div>
-            <div class="form-group" id="women">
-                <label>Type of dress:</label><br>
-                <select id="type" name="type" class="form-control">
-                    <option value="traditional">Traditional</option>
-                    {% comment %} <option value="skirt">Skirt</option>
-                    <option value="kurtha">Kurtha</option> {% endcomment %}
-                    <!-- Uncomment the following options if needed -->
-                    <!-- <option value="saree">Saree</option> -->
-                    <option value="dailywear">Dailywear</option>
-                    <option value="nightdress">Nightdress</option>
-                    <option value="partywear">Partywear</option>
-                    {% comment %} <option value="Functionwear">Functionwear</option> {% endcomment %}
-                    <option value="weddingwear">Weddingwear</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Dress for:</label><br>
-                <select id="dress_for" name="dress_for" class="form-control">
-                    <option value="women">Women</option>
-                    <option value="men">Men</option>
-                    <option value="boykids">BoyDress</option>
-                    <!-- Uncomment the following options if needed -->
-                     <option value="girlkid">GirlDress</option> 
-                    <option value="homeacc">Home Accessories</option>
-                    <option value="makeup">Make Up</option>
-                    <option value="watch">Watch</option> 
-                    <option value="footwear">FootWear</option>
-                    <option value="perfume">Perfume</option>
-                    <option value="skincare">Skin Care Product</option> 
-                    <option value="gifts">Gifts</option>
-                    <option value="jewellery">Jewellery</option>
-                </select>
-            </div>
-            {% comment %} <div class="form-group">                   
-                <label>Dress Size:</label><br>
-            <input type="radio" id="size_small" name="dress_size" value="small">
-                    <label for="size_small" class="radio-button">Small</label>
-
-                    <input type="radio" id="size_medium" name="dress_size" value="medium">
-                    <label for="size_medium" class="radio-button">Medium</label>
-
-                    <input type="radio" id="size_large" name="dress_size" value="large">
-                    <label for="size_large" class="radio-button">Large</label>
-
-                    <input type="radio" id="size_extralarge" name="dress_size" value="extralarge">
-                    <label for="size_extralarge" class="radio-button">Extra Large</label>
-
-            </div> {% endcomment %}
-            <div class="form-group">
-            <label>Available Dress Size</label><br>
-            <label>
-                <input type="checkbox" name="size" value="small"> Small
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" name="size" value="medium"> Medium
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" name="size" value="large"> Large
-            </label>
-            <br>
-            <label>
-                <input type="checkbox" name="size" value="extralarge"> Extralarge
-            </label>
-        </div>
             <div class="form-group">
                 <label for="description">Description:</label>
                 <textarea class="form-control" id="description" name="description" rows="4" ></textarea>
@@ -276,6 +252,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
+        <script>
+document.addEventListener("DOMContentLoaded", function() {
+    const dressForSelect = document.getElementById("dress_for");
+    const typeDiv = document.getElementById("dress_type_div");
+    const sizeDiv = document.getElementById("size_div");
+
+    dressForSelect.addEventListener("change", function() {
+        const selected = this.value;
+        const showFor = ["women", "men", "boykids", "girlkid"];
+
+        if (showFor.includes(selected)) {
+            typeDiv.style.display = "block";
+            sizeDiv.style.display = "block";
+        } else {
+            typeDiv.style.display = "none";
+            sizeDiv.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 {% if messages %}
         <script>
@@ -291,3 +288,7 @@
        
 
                 
+
+
+
+

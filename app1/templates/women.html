@@ -744,7 +744,7 @@
     <a href="#">Contact Us</a>
   </div>
 </div>
-
+{% for dress_type, dresses in grouped_dresses.items %}
 <section class="hero">
   <div class="hero-text">
     <h1>Elegant Dresses for Every Occasion</h1>
@@ -753,7 +753,7 @@
   </div>
   <div class="hero-img">
   
-    <img src="./skirt.jpg" alt="Fashion Banner">
+    <img src="{{ dress.image.url }}" alt="Fashion Banner">
   </div>
 </section>
 <!-- Featured Categories -->
@@ -762,12 +762,13 @@
   <div style="display: flex; justify-content: space-around; flex-wrap: wrap; gap: 30px;">
     <div style="text-align: center;">
       <a href="./index.html">
-      <img src="{% static 'images/tradition.jpg' %}g" alt="Traditional Wear" style="width: 200px; border-radius: 10px;">
-      <h3 style="color: #d81b60;">Traditional</h3></a>
+      <img src="{{ dress.image.url }}" alt="Traditional Wear" style="width: 200px; border-radius: 10px;">
+      <h3 style="color: #d81b60;">{{ dress_type|title }} Wear</h3></a>
     </div>
-    <div style="text-align: center;">
+    
+    {% comment %} <div style="text-align: center;">
       <a href="./index.html">
-      <img src="{% static 'images/partywear' %}" alt="Party Wear" style="width: 200px; border-radius: 10px;">
+      <img src="{% static 'images/partywear.jpg' %}" alt="Party Wear" style="width: 200px; border-radius: 10px;">
       <h3 style="color: #d81b60;">Party</h3></a>
     </div>
     <div style="text-align: center;">
@@ -777,7 +778,7 @@
     </div>
     <div style="text-align: center;">
       <a href="./index.html">
-      <img src="{% static 'images/weddingwear' %}" alt="Wedding Wear" style="width: 200px; border-radius: 10px;">
+      <img src="{% static 'images/wedding.jpg' %}" alt="Wedding Wear" style="width: 200px; border-radius: 10px;">
       <h3 style="color: #d81b60;">Wedding</h3></a>
     </div>
   </div>
@@ -810,9 +811,10 @@
       <img src="{% static 'images/westerndress.jpg' %}" alt="Dress 4" style="width: 100%; border-radius: 8px;">
       <h4 style="color: #d81b60;">Western Dress</h4></a>
     
-    </div>
-  </div>
+    </div>{% endcomment %}
+  </div> 
 </section>
+{% endfor%}
 
 <!-- Footer -->
 <footer style="background-color: #aa336a; color: white; padding: 40px 40px; text-align: center;">

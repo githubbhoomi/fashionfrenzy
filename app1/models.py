@@ -44,9 +44,28 @@ class Dresses(models.Model):
     image=models.ImageField(upload_to='image',default=False)
     title=models.CharField(max_length=100)
     dressid=models.IntegerField(primary_key=True)
-    price=models.CharField(max_length=120)
-    type=models.CharField(max_length=100)
-    dress_for=models.CharField(max_length=100)
+    price=models.DecimalField(max_digits=10,decimal_places=2)
+    main_category = models.CharField(
+        max_length=50,
+        choices=[
+            ('women', 'Women'),
+            ('men', 'Men'),
+            ('boykid', 'Boy Kid'),
+            ('girlkid', 'Girl Kid'),
+            ('homeacc', 'Home Accessories'),
+            ('gifts', 'Gifts'),
+            ('jewellery', 'Jewellery'),
+        ]
+    )
+    dress_type = models.CharField(
+        max_length=50,
+        choices=[
+            ('traditional', 'Traditional'),
+            ('party', 'Party Wear'),
+            ('daily', 'Daily Wear'),
+            ('wedding', 'Wedding'),
+        ]
+    )
     dress_size=models.JSONField(default=list)
     description=models.CharField(max_length=200)
     loggeduser=models.EmailField(max_length=254)
@@ -57,6 +76,43 @@ class Dresses(models.Model):
         if self.image:
             resize_image(self.image.path)
 
+# class Dresses(models.Model):
+#     image = models.ImageField(upload_to='image', default=False)
+#     title = models.CharField(max_length=100)
+#     dressid = models.AutoField(primary_key=True)
+#     price = models.DecimalField(max_digits=10, decimal_places=2)  # better for prices
+#     main_category = models.CharField(
+#         max_length=50,
+#         choices=[
+#             ('women', 'Women'),
+#             ('men', 'Men'),
+#             ('boykid', 'Boy Kid'),
+#             ('girlkid', 'Girl Kid'),
+#             ('homeacc', 'Home Accessories'),
+#             ('gifts', 'Gifts'),
+#             ('jewellery', 'Jewellery'),
+#         ]
+#     )
+#     dress_type = models.CharField(
+#         max_length=50,
+#         choices=[
+#             ('traditional', 'Traditional'),
+#             ('party', 'Party Wear'),
+#             ('daily', 'Daily Wear'),
+#             ('wedding', 'Wedding'),
+#         ]
+#     )
+#     dress_size = models.JSONField(default=list)
+#     description = models.TextField()
+#     loggeduser = models.EmailField(max_length=254)
+
+#     def __str__(self):
+#         return f"{self.title} - {self.main_category} ({self.dress_type})"
+
+#     # def save(self, *args, **kwargs):
+#     #     # super().save(*args, **kwargs)
+#     #     if self.image:
+#     #         resize_image(self.image.path)
 
 
 

@@ -84,19 +84,78 @@ def login(request):
             return render(request,'home.html')
     return render(request,'home.html')
 
-def category(request,type=None):
-    if request.method=="POST":
-        dress=Dresses.objects.filter(type=type)
-        context={"dresses":dress}
-        return render(request,'women.html',context)
-    return render(request,'women.html')
+# def category(request,type=None):
+#     if request.method=="POST":
+#         dress=Dresses.objects.filter(type=type)
+#         context={"dresses":dress}
+#         return render(request,'women.html',context)
+#     return render(request,'women.html')
+
+
+from collections import defaultdict
+def category(request,category_type=None):
+    print(category_type)
+    if category_type=='women':
+        dresses = Dresses.objects.filter(main_category='women')
+        
+        # Group by dress_type
+        grouped = defaultdict(list)
+        for dress in dresses:
+            grouped[dress.dress_type].append(dress)
+
+        # Pass the grouped dresses to template
+        return render(request, 'women.html', {
+            "grouped_dresses": dict(grouped)
+        })
+
+        # return render(request, 'women.html', {"grouped_dresses": dict(grouped)})
+        # return render(request,'women.html',context={'images':women})
+    elif category_type=='men':
+        dresses = Dresses.objects.filter(main_category='women')
+        grouped = defaultdict(list)
+        for dress in dresses:
+            grouped[dress.dress_type].append(dress)
+
+        # Pass the grouped dresses to template
+        return render(request, 'women.html', {
+            "grouped_dresses": dict(grouped)
+        })
+    elif category_type=='boykid':
+        boykid=Dresses.objects.get(main_category='boykid')
+        print(boykid)
+        return render(request,'women.html',context={'images':boykid})
+    elif category_type=='girlkid':
+        girlkid=Dresses.objects.get(main_category='girlkid')
+        print(girlkid)
+        return render(request,'women.html',context={'images':girlkid})
+    elif category_type=='homeacc':
+        homeacc=Dresses.objects.get(main_category='homeacc')
+        print(homeacc)
+        return render(request,'women.html',context={'images':homeacc})
+    elif category_type=='gifts':
+        gifts=Dresses.objects.get(main_category='gifts')
+        print(gifts)
+        return render(request,'women.html',context={'images':gifts})
+    elif category_type=='jewellery':
+        jewellery=Dresses.objects.get(main_category='jewellery')
+        print(jewellery)
+        return render(request,'women.html',context={'images':jewellery})
+    return render(request,'other.html')
 
 
 
 
 
+from django.shortcuts import render
+from .models import Dresses
 
-
+# def category(request, main_category=None, dress_type=None):
+#     if main_category:
+#         queryset = Dresses.objects.filter(main_category=main_category)
+#         if dress_type:
+#             queryset = queryset.filter(dress_type=dress_type)
+#         return render(request, "category.html", {"images": queryset})
+#     return render(request, "other.html")
 
 
 def men(request):
@@ -251,8 +310,9 @@ def image(request):
             user=request.user
             useremail=user.email
             print(user.email)
-            all_image=images(dressid=id,image=image,title=title,price=price,type=type,dress_for=dress_for,dress_size=dress_size,description=description,loggeduser=useremail)
+            all_image=Dresses(dressid=id,image=image,title=title,price=price,type=type,dress_for=dress_for,dress_size=dress_size,description=description,loggeduser=useremail)
             all_image.save()
+            messages.success(request,'Dress inserted successfully')
         # if type=="traditional":
         #     td=tradition(image=image,price=price)
         #     td.save()
@@ -268,7 +328,7 @@ def image(request):
         # elif type=="weddindwears":
         #     td=tradition(image=image,price=price)
         #     td.save()
-        messages.success(request,'Dress inserted successfully')
+        
         return render(request,'image.html',context)
    
 

@@ -26,10 +26,13 @@ path("",views.login,name="login"),
 path("login",views.login,name="login"),
 #  path("",views.home,name="home"),
  path("home",views.home,name="home"),
- path("category/<str:type>",views.category,name="category"),
- path("men",views.men,name="men"),
- path("women",views.women,name="women"),
- path("kids",views.kids,name="kids"),
+#  path("category/<str:type>/",views.category,name="category"),
+     path("category/<str:category_type>/", views.category, name="category"),
+#  path("men",views.men,name="men"),
+#  path("women",views.women,name="women"),
+#  path("kids",views.kids,name="kids"),-
+
+
     # path("traditional",views.traditional,name="traditional"),
     # path("kurtha",views.kurtha,name="kurtha"),
     # path("Partywear",views.Partywear,name="Partywear"),

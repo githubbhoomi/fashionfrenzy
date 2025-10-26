@@ -505,6 +505,12 @@ footer {
       <a href="#hero-content">Add to Cart</a>
       <a href="#">Favourite</a>
       <a href="#">Sewer/Shopper Profile</a>
+      {% comment %} <li><a href="image">Add</a></li> {% endcomment %}
+      <li><a href="{% url 'image' %}">Add</a></li>
+      <li><a href="{% url 'profileedit' %}">Profile</a></li>
+      <li><a href="{% url 'bookedview' %}">view Booked dress</a></li>
+      <li><a href="{% url 'bookeddress' %}">view Booked dress</a></li>
+
     </div>
   </div>
 
@@ -524,7 +530,7 @@ footer {
       {% comment %} Women {% endcomment %}
       <div class="category-card">
         <form action="{% url 'category' 'women' %}" method="get">
-          <input type="hidden" name="type" value="women">
+          <input type="hidden" name="category_type" value="women">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/skirt.jpg' %}" alt="Women" />
           </button>
@@ -535,7 +541,7 @@ footer {
       {% comment %} Men {% endcomment %}
       <div class="category-card">
         <form action="{% url 'category' 'men' %}" method="get">
-          <input type="hidden" name="type" value="men">
+          <input type="hidden" name="category_type" value="men">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/mencasual.jpg' %}" alt="Men" />
           </button>
@@ -546,7 +552,7 @@ footer {
       {% comment %} Kids Boys {% endcomment %}
       <div class="category-card">
         <form action="{% url 'category' 'boykid' %}" method="get">
-          <input type="hidden" name="type" value="boykids">
+          <input type="hidden" name="category_type" value="boykids">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/boykidcasual.jpg' %}" alt="Boys" />
           </button>
@@ -557,7 +563,7 @@ footer {
       {% comment %} Kids Girls {% endcomment %}
       <div class="category-card">
         <form action="{% url 'category' 'girlkid' %}" method="get">
-          <input type="hidden" name="type" value="girlkids">
+          <input type="hidden" name="category_type" value="girlkids">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/girltraditional.jpg' %}" alt="Girls" />
           </button>
@@ -568,7 +574,7 @@ footer {
       {% comment %} Home Accessories {% endcomment %}
       <div class="category-card">
         <form action="{% url 'category' 'homeacc' %}" method="get">
-          <input type="hidden" name="type" value="homeacc">
+          <input type="hidden" name="category_type" value="homeacc">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/statue.jpg' %}" alt="Home" />
           </button>
@@ -585,7 +591,7 @@ footer {
 
       <div class="product-card">
         <form action="{% url 'category' 'skincare' %}" method="get">
-          <input type="hidden" name="type" value="skincare">
+          <input type="hidden" name="category_type" value="skincare">
           <button type="submit" style="all: unset;">
             <img src="{% static 'images/skincareproduct.jpg' %}" alt="Skincare" />
           </button>
@@ -602,10 +608,10 @@ footer {
       </div>
 
       <div class="product-card">
-        <form action="{% url 'category' 'menjewellery' %}" method="get">
-          <input type="hidden" name="type" value="menjewellery">
+        <form action="{% url 'category' 'perfume' %}" method="get">
+          <input type="hidden" name="type" value="perfume">
           <button type="submit" style="all: unset;">
-            <img src="{% static 'images/menjewellery.jpg' %}" alt="Jewellery" />
+            <img src="{% static 'images/perfume.jpg' %}" alt="perfume" />
           </button>
         </form>
       </div>
